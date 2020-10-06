@@ -1,0 +1,25 @@
+name: Minio
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    name: Minio | Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+    - name: Minio | Checkout
+      uses: actions/checkout@v2
+
+    - name: Minio | .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.301
+
+    - name: Minio | Tests
+      run: dotnet test --verbosity normal
