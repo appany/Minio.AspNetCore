@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<RootNamespace>Minio.AspNetCore</RootNamespace>
+		<Authors>sergeyshaykhullin</Authors>
+		<Version>0.0.1</Version>
+		<Description>Microsoft.Extensions.DependencyInjection extensions for Minio client</Description>
+		<PackageTags>.NET Core;ASP.NET Core;Minio</PackageTags>
+		<RepositoryType>git</RepositoryType>
+		<RepositoryUrl>https://github.com/appany/Minio.AspNetCore</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/appany/Minio.AspNetCore</PackageProjectUrl>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Minio" Version="3.1.13" />
+		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="5.0.0-rc.1.20451.14" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0-rc.1.20451.14" />
+	</ItemGroup>
+
+</Project>
