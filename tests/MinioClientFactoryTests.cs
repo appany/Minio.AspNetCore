@@ -56,8 +56,6 @@ namespace Minio.AspNetCore.Tests
 		[Fact]
 		public void PassedOptions_Named_Corrent()
 		{
-			
-
 			var monitor = new OptionsMonitor<MinioOptions>(
 				new OptionsFactory<MinioOptions>(
 					new IConfigureOptions<MinioOptions>[]
