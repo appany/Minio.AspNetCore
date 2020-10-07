@@ -4,15 +4,22 @@ namespace Minio.AspNetCore
 {
 	public class MinioClientFactory : IMinioClientFactory
 	{
-		private readonly MinioOptions options;
+		private readonly IOptionsMonitor<MinioOptions> optionsMonitor;
 
-		public MinioClientFactory(IOptions<MinioOptions> options)
+		public MinioClientFactory(IOptionsMonitor<MinioOptions> optionsMonitor)
 		{
-			this.options = options.Value;
+			this.optionsMonitor = optionsMonitor;
 		}
 
 		public MinioClient CreateClient()
 		{
+			return CreateClient(Options.DefaultName);
+		}
+
+		public MinioClient CreateClient(string name)
+		{
+			var options = optionsMonitor.Get(name);
+
 			var client = new MinioClient(
 				options.Endpoint,
 				options.AccessKey,
