@@ -11,7 +11,7 @@ namespace Minio.AspNetCore.Tests
 		public ServiceCollectionNamedExtensionsTests()
 		{
 			services = new ServiceCollection()
-				.AddMinio(MinioAsserts.OptionsName, options =>
+				.AddMinio(MinioOptionsTestHelper.CustomOptionsName, options =>
 				{
 					options.Endpoint = "endpoint";
 					options.Region = "region";
@@ -34,7 +34,7 @@ namespace Minio.AspNetCore.Tests
 
 			var monitor = serviceProvider.GetService<IOptionsMonitor<MinioOptions>>();
 
-			var options = monitor.Get(MinioAsserts.OptionsName);
+			var options = monitor.Get(MinioOptionsTestHelper.CustomOptionsName);
 
 			Assert.Equal("endpoint", options.Endpoint);
 			Assert.Equal("region", options.Region);

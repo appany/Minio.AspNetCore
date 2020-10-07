@@ -19,29 +19,24 @@ namespace Minio.AspNetCore.Tests
 		[Fact]
 		public void PassedOptions_Corrent()
 		{
-			var monitor = new OptionsMonitor<MinioOptions>(
-				new OptionsFactory<MinioOptions>(
-					new[]
+			var monitor = MinioOptionsTestHelper.CreateOptionsMonitor(
+				new[]
+				{
+					new ConfigureOptions<MinioOptions>(options =>
 					{
-						new ConfigureOptions<MinioOptions>(options =>
+						options.Endpoint = "endpoint";
+						options.Region = "region";
+						options.AccessKey = "accesskey";
+						options.SecretKey = "secretkey";
+						options.SessionToken = "sessiontoken";
+						options.OnClientConfiguration = minioClient =>
 						{
-							options.Endpoint = "endpoint";
-							options.Region = "region";
-							options.AccessKey = "accesskey";
-							options.SecretKey = "secretkey";
-							options.SessionToken = "sessiontoken";
-							options.OnClientConfiguration = minioClient =>
-							{
-								minioClient.WithSSL()
-									.WithTimeout(timeout)
-									.WithProxy(webProxy);
-							};
-						}),
-					},
-					Array.Empty<IPostConfigureOptions<MinioOptions>>(),
-					ArraySegment<IValidateOptions<MinioOptions>>.Empty),
-				Array.Empty<IOptionsChangeTokenSource<MinioOptions>>(),
-				new OptionsCache<MinioOptions>());
+							minioClient.WithSSL()
+								.WithTimeout(timeout)
+								.WithProxy(webProxy);
+						};
+					})
+				});
 
 			var factory = new MinioClientFactory(monitor);
 
@@ -56,39 +51,34 @@ namespace Minio.AspNetCore.Tests
 		[Fact]
 		public void PassedOptions_Named_Corrent()
 		{
-			var monitor = new OptionsMonitor<MinioOptions>(
-				new OptionsFactory<MinioOptions>(
-					new IConfigureOptions<MinioOptions>[]
+			var monitor = MinioOptionsTestHelper.CreateOptionsMonitor(
+				new IConfigureOptions<MinioOptions>[]
+				{
+					new ConfigureOptions<MinioOptions>(options =>
 					{
-						new ConfigureOptions<MinioOptions>(options =>
-						{
-							options.Endpoint = "endpoint1";
-							options.Region = "region1";
-							options.AccessKey = "accesskey1";
-							options.SecretKey = "secretkey1";
-							options.SessionToken = "sessiontoken1";
-						}),
-						new ConfigureNamedOptions<MinioOptions>(MinioAsserts.OptionsName, options =>
-						{
-							options.Endpoint = "endpoint2";
-							options.Region = "region2";
-							options.AccessKey = "accesskey2";
-							options.SecretKey = "secretkey2";
-							options.SessionToken = "sessiontoken2";
-						}),
-					},
-					Array.Empty<IPostConfigureOptions<MinioOptions>>(),
-					ArraySegment<IValidateOptions<MinioOptions>>.Empty),
-				Array.Empty<IOptionsChangeTokenSource<MinioOptions>>(),
-				new OptionsCache<MinioOptions>());
+						options.Endpoint = "endpoint1";
+						options.Region = "region1";
+						options.AccessKey = "accesskey1";
+						options.SecretKey = "secretkey1";
+						options.SessionToken = "sessiontoken1";
+					}),
+					new ConfigureNamedOptions<MinioOptions>(MinioOptionsTestHelper.CustomOptionsName, options =>
+					{
+						options.Endpoint = "endpoint2";
+						options.Region = "region2";
+						options.AccessKey = "accesskey2";
+						options.SecretKey = "secretkey2";
+						options.SessionToken = "sessiontoken2";
+					}),
+				});
 
 			var factory = new MinioClientFactory(monitor);
 
 			var client1 = factory.CreateClient(Options.DefaultName);
 			MinioAsserts.AssertOptionsMatch(client1, monitor.Get(Options.DefaultName));
 
-			var client2 = factory.CreateClient(MinioAsserts.OptionsName);
-			MinioAsserts.AssertOptionsMatch(client2, monitor.Get(MinioAsserts.OptionsName));
+			var client2 = factory.CreateClient(MinioOptionsTestHelper.CustomOptionsName);
+			MinioAsserts.AssertOptionsMatch(client2, monitor.Get(MinioOptionsTestHelper.CustomOptionsName));
 		}
 	}
 }

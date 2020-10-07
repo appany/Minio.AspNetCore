@@ -7,7 +7,7 @@ namespace Minio.AspNetCore.Tests
 {
 	public static class MinioAsserts
 	{
-		public const string OptionsName = "test";
+		
 
 		public static void AssertOptionsMatch(MinioClient client, MinioOptions options)
 		{
