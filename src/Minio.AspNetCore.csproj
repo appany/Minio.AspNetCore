@@ -4,7 +4,7 @@
 		<TargetFramework>netstandard2.0</TargetFramework>
 		<RootNamespace>Minio.AspNetCore</RootNamespace>
 		<Authors>sergeyshaykhullin</Authors>
-		<Version>3.1.8</Version>
+		<Version>3.1.9</Version>
 		<Description>Microsoft.Extensions.DependencyInjection extensions for Minio client</Description>
 		<PackageTags>.NET Core;ASP.NET Core;Minio</PackageTags>
 		<RepositoryType>git</RepositoryType>

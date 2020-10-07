@@ -15,7 +15,6 @@ namespace Minio.AspNetCore.Tests
 				.AddMinio(options =>
 				{
 					options.Endpoint = "endpoint";
-					options.Endpoint = "endpoint";
 					options.Region = "region";
 					options.AccessKey = "accesskey";
 					options.SecretKey = "secretkey";
