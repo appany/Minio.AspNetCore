@@ -19,6 +19,9 @@ services.AddMinio(options =>
   }
 });
 
+// Url based configuration
+services.AddMinio(new Uri("s3://accessKey:secretKey@localhost:9000/region"));
+
 // Get or inject
 var client = serviceProvider.GetRequiredService<MinioClient>();
 
@@ -39,7 +42,7 @@ services.AddMinio(options =>
   }
 });
 
-// Via extension overload
+// Named extension overload
 services.AddMinio("minio2", options =>
 {
   options.Endpoint = "endpoint2";
@@ -50,7 +53,7 @@ services.AddMinio("minio2", options =>
   }
 });
 
-// Via explicit named Configure
+// Explicit named Configure
 services.AddMinio()
   .Configure<MinioOptions>("minio3", options =>
   {
