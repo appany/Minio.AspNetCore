@@ -14,7 +14,7 @@
 	</PropertyGroup>
 
 	<ItemGroup Label="Logo">
-		<None Include="../../logo.png" Pack="true" PackagePath="" />
+		<None Include="../logo.png" Pack="true" PackagePath="" />
 	</ItemGroup>
 
 	<ItemGroup Label="Packages">
