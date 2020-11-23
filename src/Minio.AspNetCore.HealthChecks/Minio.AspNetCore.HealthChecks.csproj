@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net5.0</TargetFramework>
+		<RootNamespace>Minio.AspNetCore.HealthChecks</RootNamespace>
+		<Authors>sergeyshaykhullin</Authors>
+		<Version>3.1.12</Version>
+		<Description>HealthChecks extensions for Minio client</Description>
+		<PackageTags>.NET Core;ASP.NET Core;Minio;HealthChecks</PackageTags>
+		<PackageIcon>logo.png</PackageIcon>
+		<RepositoryType>git</RepositoryType>
+		<RepositoryUrl>https://github.com/appany/Minio.AspNetCore</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/appany/Minio.AspNetCore</PackageProjectUrl>
+		<LangVersion>9</LangVersion>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+	<ItemGroup Label="References">
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+	</ItemGroup>
+
+	<ItemGroup Label="Projects">
+		<ProjectReference Include="..\Minio.AspNetCore\Minio.AspNetCore.csproj" />
+	</ItemGroup>
+
+	<ItemGroup Label="Logo">
+		<None Include="../../logo.png" Pack="true" PackagePath="" />
+	</ItemGroup>
+
+</Project>

@@ -11,16 +11,18 @@
 		<RepositoryType>git</RepositoryType>
 		<RepositoryUrl>https://github.com/appany/Minio.AspNetCore</RepositoryUrl>
 		<PackageProjectUrl>https://github.com/appany/Minio.AspNetCore</PackageProjectUrl>
+		<LangVersion>9</LangVersion>
+		<Nullable>enable</Nullable>
 	</PropertyGroup>
-
-	<ItemGroup Label="Logo">
-		<None Include="../logo.png" Pack="true" PackagePath="" />
-	</ItemGroup>
 
 	<ItemGroup Label="Packages">
 		<PackageReference Include="Minio" Version="3.1.13" />
 		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="5.0.0" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
+	</ItemGroup>
+
+	<ItemGroup Label="Logo">
+		<None Include="../../logo.png" Pack="true" PackagePath="" />
 	</ItemGroup>
 
 </Project>
