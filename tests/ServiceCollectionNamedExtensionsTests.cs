@@ -32,7 +32,7 @@ namespace Minio.AspNetCore.Tests
 			var client = serviceProvider.GetService<MinioClient>();
 			Assert.NotNull(client);
 
-			var monitor = serviceProvider.GetService<IOptionsMonitor<MinioOptions>>();
+			var monitor = serviceProvider.GetRequiredService<IOptionsMonitor<MinioOptions>>();
 
 			var options = monitor.Get(MinioOptionsTestHelper.CustomOptionsName);
 
@@ -42,7 +42,7 @@ namespace Minio.AspNetCore.Tests
 			Assert.Equal("secretkey", options.SecretKey);
 			Assert.Equal("sessiontoken", options.SessionToken);
 
-			MinioAsserts.AssertOptionsMatch(client, options);
+			MinioAsserts.AssertOptionsMatch(client!, options);
 		}
 	}
 }
