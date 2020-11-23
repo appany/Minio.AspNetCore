@@ -4,7 +4,7 @@
 		<TargetFramework>net5.0</TargetFramework>
 		<RootNamespace>Minio.AspNetCore.HealthChecks</RootNamespace>
 		<Authors>sergeyshaykhullin</Authors>
-		<Version>3.1.12</Version>
+		<Version>3.1.13</Version>
 		<Description>HealthChecks extensions for Minio client</Description>
 		<PackageTags>.NET Core;ASP.NET Core;Minio;HealthChecks</PackageTags>
 		<PackageIcon>logo.png</PackageIcon>
