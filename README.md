@@ -2,13 +2,11 @@
 
 [![Nuget](https://img.shields.io/nuget/v/Minio.AspNetCore.svg)](https://www.nuget.org/packages/Minio.AspNetCore) ![Minio](https://github.com/appany/Minio.AspNetCore/workflows/Minio/badge.svg?branch=master)
 
-`Microsoft.Extensions.DependencyInjection` extensions for [Minio](https://github.com/minio/minio-dotnet) client
+`Microsoft.Extensions.DependencyInjection` and `HealthChecks` extensions for [Minio](https://github.com/minio/minio-dotnet) client
 
 ## Usage
 
 ```cs
-// Simple usage
-
 services.AddMinio(options =>
 {
   options.Endpoint = "endpoint";
@@ -29,9 +27,9 @@ var client = serviceProvider.GetRequiredService<MinioClient>();
 var client = serviceProvider.GetRequiredService<IMinioClientFactory>().CreateClient();
 ```
 
-```cs
-// Multiple clients support via named options
+## Multiple clients support using named options
 
+```cs
 services.AddMinio(options =>
 {
   options.Endpoint = "endpoint1";
@@ -69,4 +67,17 @@ var client = serviceProvider.GetRequiredService<IMinioClientFactory>().CreateCli
 
 // Create new minio3
 var client = serviceProvider.GetRequiredService<IMinioClientFactory>().CreateClient("minio3");
+```
+
+## HealthChecks
+
+```cs
+// Minio.AspNetCore.HealthChecks package
+
+services.AddHealthChecks()
+  .AddMinio(sp => sp.GetRequiredService<MinioClient>());
+
+services.AddHealthChecks()
+  .AddMinio(sp => sp.GetRequiredService<MinioClient>())
+  .AddMinio(sp => /* Get named client from cache or create new */);
 ```

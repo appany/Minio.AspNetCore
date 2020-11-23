@@ -12,7 +12,7 @@ namespace Minio.AspNetCore
 		/// </summary>
 		public static IServiceCollection AddMinio(this IServiceCollection services)
 		{
-			return services.AddMinio(options => {});
+			return services.AddMinio(_ => {});
 		}
 
 		/// <summary>
@@ -22,7 +22,7 @@ namespace Minio.AspNetCore
 		public static IServiceCollection AddMinio(
 			this IServiceCollection services,
 			Uri url,
-			Action<MinioOptions> configure = null)
+			Action<MinioOptions>? configure = null)
 		{
 			return services.AddMinio(Options.DefaultName, url, configure);
 		}
@@ -43,7 +43,7 @@ namespace Minio.AspNetCore
 			this IServiceCollection services,
 			string name,
 			Uri url,
-			Action<MinioOptions> configure = null)
+			Action<MinioOptions>? configure = null)
 		{
 			return services.AddMinio(name, options =>
 			{

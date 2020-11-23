@@ -41,16 +41,16 @@ namespace Minio.AspNetCore.Tests
 			var client = serviceProvider.GetService<MinioClient>();
 			Assert.NotNull(client);
 
-			var options = serviceProvider.GetService<IOptions<MinioOptions>>().Value;
+			var options = serviceProvider.GetService<IOptions<MinioOptions>>()?.Value;
 			Assert.NotNull(options);
 
-			Assert.Equal("endpoint", options.Endpoint);
+			Assert.Equal("endpoint", options!.Endpoint);
 			Assert.Equal("region", options.Region);
 			Assert.Equal("accesskey", options.AccessKey);
 			Assert.Equal("secretkey", options.SecretKey);
 			Assert.Equal("sessiontoken", options.SessionToken);
 
-			MinioAsserts.AssertOptionsMatch(client, options);
+			MinioAsserts.AssertOptionsMatch(client!, options);
 		}
 
 		[Fact]
