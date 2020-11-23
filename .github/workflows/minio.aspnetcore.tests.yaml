@@ -19,7 +19,7 @@ jobs:
     - name: Minio | .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 3.1.301
+        dotnet-version: 5.0.x
 
     - name: Minio | Tests
       run: dotnet test --verbosity normal
