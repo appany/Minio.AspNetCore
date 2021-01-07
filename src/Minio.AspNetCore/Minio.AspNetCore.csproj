@@ -5,14 +5,20 @@
 		<RootNamespace>Minio.AspNetCore</RootNamespace>
 		<Authors>sergeyshaykhullin</Authors>
 		<Version>3.1.13</Version>
-		<Description>Microsoft.Extensions.DependencyInjection extensions for Minio client</Description>
-		<PackageTags>.NET Core;ASP.NET Core;Minio</PackageTags>
-		<PackageIcon>logo.png</PackageIcon>
+		<LangVersion>9</LangVersion>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+	<PropertyGroup>
 		<RepositoryType>git</RepositoryType>
 		<RepositoryUrl>https://github.com/appany/Minio.AspNetCore</RepositoryUrl>
 		<PackageProjectUrl>https://github.com/appany/Minio.AspNetCore</PackageProjectUrl>
-		<LangVersion>9</LangVersion>
-		<Nullable>enable</Nullable>
+		<PackageIcon>content/logo.png</PackageIcon>
+		<PackageLicenseFile>content/LICENSE</PackageLicenseFile>
+		<Copyright>Copyright ©2021 AppAny</Copyright>
+		<Authors>sergeyshaykhullin</Authors>
+		<Description>EntityFrameworkCore PostgreSQL migrations for AppAny.Quartz.NET</Description>
+		<PackageTags>.NET Core;ASP.NET Core;EntityFrameworkCore;AppAny.Quartz.NET;PostgreSQL</PackageTags>
 	</PropertyGroup>
 
 	<ItemGroup Label="Packages">
@@ -21,8 +27,9 @@
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
 	</ItemGroup>
 
-	<ItemGroup Label="Logo">
-		<None Include="../../logo.png" Pack="true" PackagePath="" />
+	<ItemGroup Label="Assets">
+		<None Include="../../assets/logo.png" Pack="true" Visible="false"/>
+		<None Include="../../LICENSE" Pack="true" Visible="false"/>
 	</ItemGroup>
 
 </Project>
