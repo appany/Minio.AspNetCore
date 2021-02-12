@@ -28,8 +28,16 @@
 	</ItemGroup>
 
 	<ItemGroup Label="Assets">
-		<None Include="../../assets/logo.png" Pack="true" Visible="false"/>
-		<None Include="../../LICENSE" Pack="true" Visible="false"/>
+		<None Include="../../assets/logo.png">
+			<Pack>true</Pack>
+			<Visible>false</Visible>
+			<PackagePath />
+		</None>
+		<None Include="../../LICENSE">
+			<Pack>true</Pack>
+			<Visible>false</Visible>
+			<PackagePath />
+		</None>
 	</ItemGroup>
 
 </Project>
