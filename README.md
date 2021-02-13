@@ -4,6 +4,12 @@
 
 `Microsoft.Extensions.DependencyInjection` and `HealthChecks` extensions for [Minio](https://github.com/minio/minio-dotnet) client
 
+## Installation
+
+```bash
+$> dotnet add package Minio.AspNetCore
+```
+
 ## Usage
 
 ```cs
