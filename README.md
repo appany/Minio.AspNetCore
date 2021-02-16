@@ -1,6 +1,6 @@
 # Minio.AspNetCore
 
-[![Nuget](https://img.shields.io/nuget/v/Minio.AspNetCore.svg)](https://www.nuget.org/packages/Minio.AspNetCore) ![Minio](https://github.com/appany/Minio.AspNetCore/workflows/Minio/badge.svg?branch=master)
+[![Nuget](https://img.shields.io/nuget/v/Minio.AspNetCore.svg)](https://www.nuget.org/packages/Minio.AspNetCore) ![Minio](https://github.com/appany/Minio.AspNetCore/workflows/Minio/badge.svg?branch=master) [![Coverage Status](https://coveralls.io/repos/github/appany/Minio.AspNetCore/badge.svg?branch=main)](https://coveralls.io/github/appany/Minio.AspNetCore?branch=main)
 
 `Microsoft.Extensions.DependencyInjection` and `HealthChecks` extensions for [Minio](https://github.com/minio/minio-dotnet) client
 
