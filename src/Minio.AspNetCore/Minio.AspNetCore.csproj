@@ -15,8 +15,8 @@
 		<RepositoryType>git</RepositoryType>
 		<RepositoryUrl>https://github.com/appany/Minio.AspNetCore</RepositoryUrl>
 		<PackageProjectUrl>https://github.com/appany/Minio.AspNetCore</PackageProjectUrl>
-		<PackageIcon>content/logo.png</PackageIcon>
-		<PackageLicenseFile>content/LICENSE</PackageLicenseFile>
+		<PackageIcon>logo.png</PackageIcon>
+		<PackageLicenseFile>LICENSE</PackageLicenseFile>
 		<Copyright>Copyright ©2021 AppAny</Copyright>
 		<Authors>sergeyshaykhullin</Authors>
 		<Description>ASP.NET Core extensions for Minio client</Description>
