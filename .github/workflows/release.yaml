@@ -1,0 +1,91 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      release:
+        description: Release
+        required: true
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Release | Checkout
+      uses: actions/checkout@v2.3.4
+
+    - name: Release | Setup
+      uses: actions/setup-dotnet@v1.7.2
+      with:
+        dotnet-version: 5.0.x
+
+    - name: Release
+      id: release
+      uses: actions/create-release@v1.1.4
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.event.inputs.release }}
+        release_name: ${{ github.event.inputs.release }}
+
+    - name: Release | Publish
+      id: publish
+      uses: brandedoutcast/publish-nuget@v2.5.5
+      with:
+        NUGET_KEY: ${{ secrets.NUGET_API_KEY }}
+        PROJECT_FILE_PATH: src/Minio.AspNetCore/Minio.AspNetCore.csproj
+        VERSION_STATIC: ${{ github.event.inputs.release }}
+        TAG_FORMAT: '*'
+        INCLUDE_SYMBOLS: true
+
+    - name: Release | Assets
+      uses: actions/upload-release-asset@v1.0.2
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.release.outputs.upload_url }}
+        asset_name: ${{ steps.publish.outputs.PACKAGE_NAME }}
+        asset_path: ${{ steps.publish.outputs.PACKAGE_PATH }}
+        asset_content_type: application/zip
+
+    - name: Release | Assets | Symbols
+      uses: actions/upload-release-asset@v1.0.2
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.release.outputs.upload_url }}
+        asset_name: ${{ steps.publish.outputs.SYMBOLS_PACKAGE_NAME }}
+        asset_path: ${{ steps.publish.outputs.SYMBOLS_PACKAGE_PATH }}
+        asset_content_type: application/zip
+
+    - name: Release | Publish | HealthChecks
+      id: publish_healthchecks
+      uses: brandedoutcast/publish-nuget@v2.5.5
+      with:
+        NUGET_KEY: ${{ secrets.NUGET_API_KEY }}
+        PROJECT_FILE_PATH: src/Minio.AspNetCore.HealthChecks/Minio.AspNetCore.HealthChecks.csproj
+        VERSION_STATIC: ${{ github.event.inputs.release }}
+        TAG_FORMAT: '*'
+        INCLUDE_SYMBOLS: true
+
+    - name: Release | Assets | HealthChecks
+      uses: actions/upload-release-asset@v1.0.2
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.release.outputs.upload_url }}
+        asset_name: ${{ steps.publish_healthchecks.outputs.PACKAGE_NAME }}
+        asset_path: ${{ steps.publish_healthchecks.outputs.PACKAGE_PATH }}
+        asset_content_type: application/zip
+
+    - name: Release | Assets | HealthChecks | Symbols
+      uses: actions/upload-release-asset@v1.0.2
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.release.outputs.upload_url }}
+        asset_name: ${{ steps.publish_healthchecks.outputs.SYMBOLS_PACKAGE_NAME }}
+        asset_path: ${{ steps.publish_healthchecks.outputs.SYMBOLS_PACKAGE_PATH }}
+        asset_content_type: application/zip

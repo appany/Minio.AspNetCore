@@ -2,11 +2,13 @@
 
 	<PropertyGroup>
 		<TargetFramework>net5.0</TargetFramework>
-		<RootNamespace>Minio.AspNetCore</RootNamespace>
-		<Authors>sergeyshaykhullin</Authors>
-		<Version>3.1.13</Version>
-		<LangVersion>9</LangVersion>
 		<Nullable>enable</Nullable>
+		<Version>3.1.14</Version>
+		<LangVersion>9</LangVersion>
+		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 	</PropertyGroup>
 
 	<PropertyGroup>
@@ -17,8 +19,8 @@
 		<PackageLicenseFile>content/LICENSE</PackageLicenseFile>
 		<Copyright>Copyright ©2021 AppAny</Copyright>
 		<Authors>sergeyshaykhullin</Authors>
-		<Description>EntityFrameworkCore PostgreSQL migrations for AppAny.Quartz.NET</Description>
-		<PackageTags>.NET Core;ASP.NET Core;EntityFrameworkCore;AppAny.Quartz.NET;PostgreSQL</PackageTags>
+		<Description>ASP.NET Core extensions for Minio client</Description>
+		<PackageTags>.NET Core;ASP.NET Core;Minio</PackageTags>
 	</PropertyGroup>
 
 	<ItemGroup Label="Packages">

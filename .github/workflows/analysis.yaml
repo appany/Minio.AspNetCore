@@ -1,0 +1,26 @@
+name: Analysis
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  analysis:
+    name: Analysis
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Analysis | Checkout
+      uses: actions/checkout@v2
+
+    - name: Analysis | Setup
+      uses: github/codeql-action/init@v1
+      with:
+        languages: csharp
+
+    - name: Analysis | Build
+      uses: github/codeql-action/autobuild@v1
+
+    - name: Analysis
+      uses: github/codeql-action/analyze@v1
