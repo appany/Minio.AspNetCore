@@ -34,10 +34,10 @@ jobs:
       id: publish
       uses: brandedoutcast/publish-nuget@v2.5.5
       with:
+        NUGET_KEY: ${{ secrets.NUGET_API_KEY }}
         PROJECT_FILE_PATH: src/Minio.AspNetCore/Minio.AspNetCore.csproj
         VERSION_STATIC: ${{ github.event.inputs.release }}
         TAG_FORMAT: '*'
-        NUGET_KEY: ${{ secrets.NUGET_API_KEY }}
         INCLUDE_SYMBOLS: true
 
     - name: Release | Assets
@@ -64,10 +64,10 @@ jobs:
       id: publish_healthchecks
       uses: brandedoutcast/publish-nuget@v2.5.5
       with:
+        NUGET_KEY: ${{ secrets.NUGET_API_KEY }}
         PROJECT_FILE_PATH: src/Minio.AspNetCore.HealthChecks/Minio.AspNetCore.HealthChecks.csproj
         VERSION_STATIC: ${{ github.event.inputs.release }}
         TAG_FORMAT: '*'
-        NUGET_KEY: ${{ secrets.NUGET_API_KEY }}
         INCLUDE_SYMBOLS: true
 
     - name: Release | Assets | HealthChecks
