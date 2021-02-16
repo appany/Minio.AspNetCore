@@ -2,17 +2,25 @@
 
 	<PropertyGroup>
 		<TargetFramework>net5.0</TargetFramework>
-		<RootNamespace>Minio.AspNetCore.HealthChecks</RootNamespace>
-		<Authors>sergeyshaykhullin</Authors>
-		<Version>3.1.13</Version>
-		<Description>HealthChecks extensions for Minio client</Description>
-		<PackageTags>.NET Core;ASP.NET Core;Minio;HealthChecks</PackageTags>
-		<PackageIcon>logo.png</PackageIcon>
+		<Nullable>enable</Nullable>
+		<Version>3.1.14</Version>
+		<LangVersion>9</LangVersion>
+		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+	</PropertyGroup>
+
+	<PropertyGroup>
 		<RepositoryType>git</RepositoryType>
 		<RepositoryUrl>https://github.com/appany/Minio.AspNetCore</RepositoryUrl>
 		<PackageProjectUrl>https://github.com/appany/Minio.AspNetCore</PackageProjectUrl>
-		<LangVersion>9</LangVersion>
-		<Nullable>enable</Nullable>
+		<PackageIcon>content/logo.png</PackageIcon>
+		<PackageLicenseFile>content/LICENSE</PackageLicenseFile>
+		<Copyright>Copyright ©2021 AppAny</Copyright>
+		<Authors>sergeyshaykhullin</Authors>
+		<Description>HealthChecks extensions for Minio client</Description>
+		<PackageTags>.NET Core;ASP.NET Core;Minio;HealthChecks</PackageTags>
 	</PropertyGroup>
 
 	<ItemGroup Label="References">
@@ -23,8 +31,17 @@
 		<ProjectReference Include="..\Minio.AspNetCore\Minio.AspNetCore.csproj" />
 	</ItemGroup>
 
-	<ItemGroup Label="Logo">
-		<None Include="../../logo.png" Pack="true" PackagePath="" />
+	<ItemGroup Label="Assets">
+		<None Include="../../assets/logo.png">
+			<Pack>true</Pack>
+			<Visible>false</Visible>
+			<PackagePath />
+		</None>
+		<None Include="../../LICENSE">
+			<Pack>true</Pack>
+			<Visible>false</Visible>
+			<PackagePath />
+		</None>
 	</ItemGroup>
 
 </Project>
