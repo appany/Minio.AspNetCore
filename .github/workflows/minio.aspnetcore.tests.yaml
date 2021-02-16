@@ -22,4 +22,11 @@ jobs:
         dotnet-version: 5.0.x
 
     - name: Minio | Tests
-      run: dotnet test --verbosity normal
+      run: dotnet test /p:CollectCoverage=true /p:CoverletOutput=coverage/ /p:CoverletOutputFormat=lcov
+
+    - name: Minio | Tests | Coverage | Publish
+      uses: coverallsapp/github-action@v1.0.1
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        path-to-lcov: tests/coverage/coverage.info
+

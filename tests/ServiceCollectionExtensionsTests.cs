@@ -25,9 +25,9 @@ namespace Minio.AspNetCore.Tests
 		[Fact]
 		public void AddToServices()
 		{
-			Assert.True(services.Any(x => x.ServiceType == typeof(IMinioClientFactory)));
-			Assert.True(services.Any(x => x.ServiceType == typeof(IConfigureOptions<MinioOptions>)));
-			Assert.True(services.Any(x => x.ServiceType == typeof(MinioClient)));
+			Assert.Contains(services, x => x.ServiceType == typeof(IMinioClientFactory));
+			Assert.Contains(services, x => x.ServiceType == typeof(IConfigureOptions<MinioOptions>));
+			Assert.Contains(services,x => x.ServiceType == typeof(MinioClient));
 		}
 
 		[Fact]
