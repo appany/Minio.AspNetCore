@@ -1,4 +1,4 @@
-# Minio.AspNetCore
+# 💥 Minio.AspNetCore 💥
 
 [![License](https://img.shields.io/github/license/appany/Minio.AspNetCore.svg)](https://github.com/appany/Minio.AspnetCore/blob/main/LICENSE)
 [![Nuget](https://img.shields.io/nuget/v/Minio.AspNetCore.svg)](https://www.nuget.org/packages/Minio.AspNetCore)
@@ -6,16 +6,17 @@
 ![Tests](https://github.com/appany/Minio.AspNetCore/workflows/Tests/badge.svg)
 [![Coverage Status](https://coveralls.io/repos/github/appany/Minio.AspNetCore/badge.svg?branch=main)](https://coveralls.io/github/appany/Minio.AspNetCore?branch=main)
 
-`Microsoft.Extensions.DependencyInjection` and `HealthChecks` extensions for [Minio](https://github.com/minio/minio-dotnet) client
+⚡️ `Microsoft.Extensions.DependencyInjection` and `HealthChecks` extensions for [Minio](https://github.com/minio/minio-dotnet) client ⚡️
 
-## Installation
+## 🔧 Installation 🔧
 
 ```bash
 $> dotnet add package Minio.AspNetCore
 ```
 
-## Usage
+## 🎨 Usage 🎨
 
+✅ Add `MinioClient`
 ```cs
 services.AddMinio(options =>
 {
@@ -37,7 +38,7 @@ var client = serviceProvider.GetRequiredService<MinioClient>();
 var client = serviceProvider.GetRequiredService<IMinioClientFactory>().CreateClient();
 ```
 
-## Multiple clients support using named options
+✅ **Multiple clients** support using named options
 
 ```cs
 services.AddMinio(options =>
@@ -79,7 +80,7 @@ var client = serviceProvider.GetRequiredService<IMinioClientFactory>().CreateCli
 var client = serviceProvider.GetRequiredService<IMinioClientFactory>().CreateClient("minio3");
 ```
 
-## HealthChecks
+## 🚑 HealthChecks 🚑
 
 ```cs
 // Minio.AspNetCore.HealthChecks package
