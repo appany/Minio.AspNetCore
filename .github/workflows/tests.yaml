@@ -2,7 +2,7 @@ name: Tests
 
 on:
   pull_request:
-    branches: [ $default-branch ]
+    branches: [ main ]
 
 jobs:
   tests:
