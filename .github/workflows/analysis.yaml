@@ -2,7 +2,7 @@ name: Analysis
 
 on:
   push:
-    branches: [ main ]
+    branches: [ $default-branch ]
   workflow_dispatch:
 
 jobs:
