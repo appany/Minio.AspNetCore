@@ -12,7 +12,7 @@ jobs:
 
     steps:
     - name: Analysis | Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v2.3.4
 
     - name: Analysis | Setup
       uses: github/codeql-action/init@v1
