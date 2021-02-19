@@ -4,7 +4,7 @@
 [![Nuget](https://img.shields.io/nuget/v/Minio.AspNetCore.svg)](https://www.nuget.org/packages/Minio.AspNetCore)
 [![Downloads](https://img.shields.io/nuget/dt/Minio.AspNetCore)](https://www.nuget.org/packages/Minio.AspNetCore)
 ![Tests](https://github.com/appany/Minio.AspNetCore/workflows/Tests/badge.svg)
-[![Coverage Status](https://coveralls.io/repos/github/appany/Minio.AspNetCore/badge.svg?branch=main)](https://coveralls.io/github/appany/Minio.AspNetCore?branch=main)
+[![codecov](https://codecov.io/gh/appany/Minio.AspNetCore/branch/main/graph/badge.svg?token=CGFNCIRBKP)](https://codecov.io/gh/appany/Minio.AspNetCore)
 
 ⚡️ `Microsoft.Extensions.DependencyInjection` and `HealthChecks` extensions for [Minio](https://github.com/minio/minio-dotnet) client ⚡️
 
