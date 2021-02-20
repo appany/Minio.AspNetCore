@@ -22,10 +22,10 @@ jobs:
         dotnet-version: 5.0.x
 
     - name: Tests
-      run: dotnet test /p:CollectCoverage=true /p:CoverletOutput=coverage/ /p:CoverletOutputFormat=lcov
+      run: dotnet test /p:CollectCoverage=true /p:CoverletOutput=../ /p:CoverletOutputFormat=lcov
 
     - name: Tests | Coverage
       uses: codecov/codecov-action@v1
       with:
         flags: unittests
-        files: tests/coverage/coverage.info
+        files: coverage.info
