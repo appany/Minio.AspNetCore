@@ -8,10 +8,15 @@ on:
         required: true
         default: patch
 
+env:
+  RELEASE_TYPE: ${{ github.event.inputs.release }}
+  UPDATE_WORKFLOWS_TOKEN: ${{ secrets.UPDATE_WORKFLOWS_TOKEN }}
+
 jobs:
   release:
     name: Release
     runs-on: ubuntu-20.04
+    timeout-minutes: 5
 
     steps:
     - name: Release | Checkout
@@ -20,14 +25,14 @@ jobs:
     - name: Release | Previous | Cancel
       uses: styfle/cancel-workflow-action@0.8.0
       with:
-        access_token: ${{ secrets.UPDATE_WORKFLOWS_TOKEN }}
+        access_token: ${{ env.UPDATE_WORKFLOWS_TOKEN }}
 
     - name: Release | Tag
       id: tag
       uses: zwaldowski/semver-release-action@v1
       with:
-        bump: ${{ github.event.inputs.release }}
-        github_token: ${{ secrets.UPDATE_WORKFLOWS_TOKEN }}
+        bump: ${{ env.RELEASE_TYPE }}
+        github_token: ${{ env.UPDATE_WORKFLOWS_TOKEN }}
       env:
         ACTIONS_ALLOW_UNSECURE_COMMANDS: true
 
@@ -37,4 +42,4 @@ jobs:
         tag_name: ${{ steps.tag.outputs.version }}
         release_name: ${{ steps.tag.outputs.version }}
       env:
-        GITHUB_TOKEN: ${{ secrets.UPDATE_WORKFLOWS_TOKEN }}
+        GITHUB_TOKEN: ${{ env.UPDATE_WORKFLOWS_TOKEN }}
