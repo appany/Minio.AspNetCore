@@ -4,10 +4,16 @@ on:
   release:
     types: [created]
 
+env:
+  DOTNET_VERSION: 5.0.x
+  NUGET_KEY: ${{ secrets.NUGET_API_KEY }}
+  TAG_FORMAT: '*'
+
 jobs:
   package:
     name: Package
     runs-on: ubuntu-20.04
+    timeout-minutes: 5
 
     steps:
     - name: Package | Checkout
@@ -20,22 +26,22 @@ jobs:
     - name: Package | Setup
       uses: actions/setup-dotnet@v1.7.2
       with:
-        dotnet-version: 5.0.x
+        dotnet-version: ${{ env.DOTNET_VERSION }}
 
     - name: Package | Publish
       uses: brandedoutcast/publish-nuget@v2.5.5
       with:
-        NUGET_KEY: ${{ secrets.NUGET_API_KEY }}
+        NUGET_KEY: ${{ env.NUGET_KEY }}
         PROJECT_FILE_PATH: src/Minio.AspNetCore/Minio.AspNetCore.csproj
         VERSION_STATIC: ${{ steps.release.outputs.tag }}
-        TAG_FORMAT: '*'
+        TAG_FORMAT: ${{ env.TAG_FORMAT }}
         INCLUDE_SYMBOLS: true
 
     - name: Package | Publish | HealthChecks
       uses: brandedoutcast/publish-nuget@v2.5.5
       with:
-        NUGET_KEY: ${{ secrets.NUGET_API_KEY }}
+        NUGET_KEY: ${{ env.NUGET_KEY }}
         PROJECT_FILE_PATH: src/Minio.AspNetCore.HealthChecks/Minio.AspNetCore.HealthChecks.csproj
         VERSION_STATIC: ${{ steps.release.outputs.tag }}
-        TAG_FORMAT: '*'
+        TAG_FORMAT: ${{ env.TAG_FORMAT }}
         INCLUDE_SYMBOLS: true
