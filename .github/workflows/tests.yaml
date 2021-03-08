@@ -8,7 +8,6 @@ on:
 
 env:
   DOTNET_VERSION: 5.0.x
-
   COVERAGE_REPORT: coverage.info
 
 jobs:
