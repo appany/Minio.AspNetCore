@@ -4,45 +4,45 @@ using Xunit;
 
 namespace Minio.AspNetCore.Tests
 {
-	public class ServiceCollectionNamedExtensionsTests
-	{
-		private readonly IServiceCollection services;
+  public class ServiceCollectionNamedExtensionsTests
+  {
+    private readonly IServiceCollection services;
 
-		public ServiceCollectionNamedExtensionsTests()
-		{
-			services = new ServiceCollection()
-				.AddMinio(MinioOptionsTestHelper.CustomOptionsName, options =>
-				{
-					options.Endpoint = "endpoint";
-					options.Region = "region";
-					options.AccessKey = "accesskey";
-					options.SecretKey = "secretkey";
-					options.SessionToken = "sessiontoken";
-				});
-		}
+    public ServiceCollectionNamedExtensionsTests()
+    {
+      services = new ServiceCollection()
+        .AddMinio(MinioOptionsTestHelper.CustomOptionsName, options =>
+        {
+          options.Endpoint = "endpoint";
+          options.Region = "region";
+          options.AccessKey = "accesskey";
+          options.SecretKey = "secretkey";
+          options.SessionToken = "sessiontoken";
+        });
+    }
 
-		[Fact]
-		public void GetFromServices()
-		{
-			var serviceProvider = services.BuildServiceProvider();
+    [Fact]
+    public void GetFromServices()
+    {
+      var serviceProvider = services.BuildServiceProvider();
 
-			var factory = serviceProvider.GetService<IMinioClientFactory>();
-			Assert.NotNull(factory);
+      var factory = serviceProvider.GetService<IMinioClientFactory>();
+      Assert.NotNull(factory);
 
-			var client = serviceProvider.GetService<MinioClient>();
-			Assert.NotNull(client);
+      var client = serviceProvider.GetService<MinioClient>();
+      Assert.NotNull(client);
 
-			var monitor = serviceProvider.GetRequiredService<IOptionsMonitor<MinioOptions>>();
+      var monitor = serviceProvider.GetRequiredService<IOptionsMonitor<MinioOptions>>();
 
-			var options = monitor.Get(MinioOptionsTestHelper.CustomOptionsName);
+      var options = monitor.Get(MinioOptionsTestHelper.CustomOptionsName);
 
-			Assert.Equal("endpoint", options.Endpoint);
-			Assert.Equal("region", options.Region);
-			Assert.Equal("accesskey", options.AccessKey);
-			Assert.Equal("secretkey", options.SecretKey);
-			Assert.Equal("sessiontoken", options.SessionToken);
+      Assert.Equal("endpoint", options.Endpoint);
+      Assert.Equal("region", options.Region);
+      Assert.Equal("accesskey", options.AccessKey);
+      Assert.Equal("secretkey", options.SecretKey);
+      Assert.Equal("sessiontoken", options.SessionToken);
 
-			MinioAsserts.AssertOptionsMatch(client!, options);
-		}
-	}
+      MinioAsserts.AssertOptionsMatch(client!, options);
+    }
+  }
 }
