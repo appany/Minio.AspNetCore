@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <Nullable>enable</Nullable>
-    <Version>3.1.16</Version>
+    <Version>3.1.17</Version>
     <LangVersion>9</LangVersion>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <IncludeSymbols>true</IncludeSymbols>
@@ -22,10 +22,6 @@
     <Description>HealthChecks extensions for Minio client</Description>
     <PackageTags>.NET Core;ASP.NET Core;Minio;HealthChecks</PackageTags>
   </PropertyGroup>
-
-  <ItemGroup Label="References">
-    <FrameworkReference Include="Microsoft.AspNetCore.App" />
-  </ItemGroup>
 
   <ItemGroup Label="Projects">
     <ProjectReference Include="..\Minio.AspNetCore\Minio.AspNetCore.csproj" />
