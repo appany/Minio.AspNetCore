@@ -2,12 +2,14 @@ name: Tests
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
+  workflow_dispatch:
 
 env:
-  DOTNET_VERSION: 5.0.x
+  DOTNET_VERSION: 6.0.100-preview.2.21155.3
+
   COVERAGE_REPORT: coverage.info
 
 jobs:
@@ -17,19 +19,18 @@ jobs:
     timeout-minutes: 5
 
     steps:
-    - name: Tests | Checkout
-      uses: actions/checkout@v2.3.4
+      - name: Tests | Checkout
+        uses: actions/checkout@v2
 
-    - name: Tests | Setup
-      uses: actions/setup-dotnet@v1.7.2
-      with:
-        dotnet-version: ${{ env.DOTNET_VERSION }}
+      - name: Tests | Setup
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
 
-    - name: Tests
-      run: dotnet test /p:CollectCoverage=true /p:CoverletOutput=../ /p:CoverletOutputFormat=lcov
+      - name: Tests
+        run: dotnet test /p:CollectCoverage=true /p:CoverletOutput=../ /p:CoverletOutputFormat=lcov
 
-    - name: Tests | Coverage
-      uses: codecov/codecov-action@v1.2.1
-      with:
-        flags: unittests
-        files: ${{ env.COVERAGE_REPORT }}
+      - name: Tests | Coverage
+        uses: codecov/codecov-action@v1
+        with:
+          files: ${{ env.COVERAGE_REPORT }}

@@ -8,10 +8,6 @@ on:
         required: true
         default: patch
 
-env:
-  RELEASE_TYPE: ${{ github.event.inputs.release }}
-  UPDATE_WORKFLOWS_TOKEN: ${{ secrets.UPDATE_WORKFLOWS_TOKEN }}
-
 jobs:
   release:
     name: Release
@@ -19,25 +15,20 @@ jobs:
     timeout-minutes: 5
 
     steps:
-    - name: Release | Checkout
-      uses: actions/checkout@v2.3.4
+      - name: Release | Checkout
+        uses: actions/checkout@v2
 
-    - name: Release | Previous | Cancel
-      uses: styfle/cancel-workflow-action@0.8.0
-      with:
-        access_token: ${{ env.UPDATE_WORKFLOWS_TOKEN }}
+      - name: Release | Tag
+        id: tag
+        uses: zwaldowski/semver-release-action@v2
+        with:
+          bump: ${{ github.event.inputs.release }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+        env:
+          ACTIONS_ALLOW_UNSECURE_COMMANDS: true
 
-    - name: Release | Tag
-      id: tag
-      uses: zwaldowski/semver-release-action@v2
-      with:
-        bump: ${{ env.RELEASE_TYPE }}
-        github_token: ${{ env.UPDATE_WORKFLOWS_TOKEN }}
-      env:
-        ACTIONS_ALLOW_UNSECURE_COMMANDS: true
-
-    - name: Release
-      uses: ncipollo/release-action@v1.8.0
-      with:
-        tag: ${{ steps.tag.outputs.version }}
-        token: ${{ env.UPDATE_WORKFLOWS_TOKEN }}
+      - name: Release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: ${{ steps.tag.outputs.version }}
+          token: ${{ secrets.CREATE_RELEASE_TOKEN }}
