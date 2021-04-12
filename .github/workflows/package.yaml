@@ -27,19 +27,19 @@ jobs:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
       - name: Package | Publish
-        uses: brandedoutcast/publish-nuget@v2
+        uses: drusellers/publish-nuget@v3
         with:
-          NUGET_KEY: ${{ secrets.NUGET_API_KEY }}
-          PROJECT_FILE_PATH: src/Minio.AspNetCore/Minio.AspNetCore.csproj
-          VERSION_STATIC: ${{ steps.release.outputs.tag }}
-          TAG_FORMAT: '*'
-          INCLUDE_SYMBOLS: true
+          project-file-path: src/Minio.AspNetCore/Minio.AspNetCore.csproj
+          version: ${{ steps.release.outputs.tag }}
+          tag-format: '*'
+          nuget-key: ${{ secrets.NUGET_API_KEY }}
+          include-symbols: true
 
       - name: Package | Publish | HealthChecks
-        uses: brandedoutcast/publish-nuget@v2
+        uses: drusellers/publish-nuget@v3
         with:
-          NUGET_KEY: ${{ secrets.NUGET_API_KEY }}
-          PROJECT_FILE_PATH: src/Minio.AspNetCore.HealthChecks/Minio.AspNetCore.HealthChecks.csproj
-          VERSION_STATIC: ${{ steps.release.outputs.tag }}
-          TAG_FORMAT: '*'
-          INCLUDE_SYMBOLS: true
+          project-file-path: src/Minio.AspNetCore.HealthChecks/Minio.AspNetCore.HealthChecks.csproj
+          version: ${{ steps.release.outputs.tag }}
+          tag-format: '*'
+          nuget-key: ${{ secrets.NUGET_API_KEY }}
+          include-symbols: true
