@@ -4,9 +4,6 @@ on:
   release:
     types: [created]
 
-env:
-  DOTNET_VERSION: 6.0.100-preview.3.21202.5
-
 jobs:
   package:
     name: Package
@@ -24,7 +21,8 @@ jobs:
       - name: Package | Setup
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: ${{ env.DOTNET_VERSION }}
+          dotnet-version: 6.0.x
+          include-prerelease: true
 
       - name: Package | Publish
         uses: drusellers/publish-nuget@v3
