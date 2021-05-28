@@ -7,11 +7,6 @@ on:
     branches: [main]
   workflow_dispatch:
 
-env:
-  DOTNET_VERSION: 6.0.100-preview.3.21202.5
-
-  COVERAGE_REPORT: coverage.info
-
 jobs:
   tests:
     name: Tests
@@ -25,7 +20,8 @@ jobs:
       - name: Tests | Setup
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: ${{ env.DOTNET_VERSION }}
+          dotnet-version: 6.0.x
+          include-prerelease: true
 
       - name: Tests
         run: dotnet test /p:CollectCoverage=true /p:CoverletOutput=../ /p:CoverletOutputFormat=lcov
@@ -33,4 +29,4 @@ jobs:
       - name: Tests | Coverage
         uses: codecov/codecov-action@v1
         with:
-          files: ${{ env.COVERAGE_REPORT }}
+          files: coverage.info
