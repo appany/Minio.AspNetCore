@@ -42,7 +42,7 @@ namespace Minio.AspNetCore.Tests
       Assert.Equal("secretkey", options.SecretKey);
       Assert.Equal("sessiontoken", options.SessionToken);
 
-      MinioAsserts.AssertOptionsMatch(client!, options);
+      MinioAsserts.AssertOptionsMatch(client, options);
     }
   }
 }
