@@ -7,6 +7,11 @@ on:
         description: Release
         required: true
         default: patch
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
 
 jobs:
   release:
