@@ -45,10 +45,10 @@ services.AddMinio(options =>
 {
   options.Endpoint = "endpoint1";
   // ...
-  options.OnClientConfiguration = client =>
+  options.ConfigureClient(client =>
   {
     client.WithSSL();
-  }
+  });
 });
 
 // Named extension overload
@@ -56,10 +56,10 @@ services.AddMinio("minio2", options =>
 {
   options.Endpoint = "endpoint2";
   // ...
-  options.OnClientConfiguration = client =>
+  options.ConfigureClient(client =>
   {
     client.WithSSL().WithTimeout(...);
-  }
+  });
 });
 
 // Explicit named Configure
