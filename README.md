@@ -22,10 +22,10 @@ services.AddMinio(options =>
 {
   options.Endpoint = "endpoint";
   // ...
-  options.OnClientConfiguration = client =>
+  options.ConfigureClient(client =>
   {
     client.WithSSL();
-  }
+  });
 });
 
 // Url based configuration
