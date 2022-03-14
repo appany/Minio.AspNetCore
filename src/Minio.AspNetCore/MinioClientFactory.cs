@@ -20,14 +20,17 @@ namespace Minio.AspNetCore
     {
       var options = optionsMonitor.Get(name);
 
-      var client = new MinioClient(
-        options.Endpoint,
-        options.AccessKey,
-        options.SecretKey,
-        options.Region,
-        options.SessionToken);
+      var client = new MinioClient()
+        .WithEndpoint(options.Endpoint)
+        .WithCredentials(options.AccessKey, options.SecretKey)
+        .WithSessionToken(options.SessionToken);
 
-      options.OnClientConfiguration?.Invoke(client);
+      if (!string.IsNullOrEmpty(options.Region))
+      {
+        client.WithRegion(options.Region);
+      }
+
+      options.Configure?.Invoke(client);
 
       return client;
     }
