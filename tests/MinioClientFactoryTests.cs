@@ -28,12 +28,12 @@ namespace Minio.AspNetCore.Tests
             options.AccessKey = "accesskey";
             options.SecretKey = "secretkey";
             options.SessionToken = "sessiontoken";
-            options.OnClientConfiguration = minioClient =>
+            options.ConfigureClient(minioClient =>
             {
               minioClient.WithSSL()
                 .WithTimeout(timeout)
                 .WithProxy(webProxy);
-            };
+            });
           })
         });
 

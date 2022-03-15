@@ -6,7 +6,7 @@
 ![Tests](https://github.com/appany/Minio.AspNetCore/workflows/Tests/badge.svg)
 [![codecov](https://codecov.io/gh/appany/Minio.AspNetCore/branch/main/graph/badge.svg?token=CGFNCIRBKP)](https://codecov.io/gh/appany/Minio.AspNetCore)
 
-⚡️ `Microsoft.Extensions.DependencyInjection` and `HealthChecks` extensions for [Minio](https://github.com/minio/minio-dotnet) client ⚡️
+⚡️ `Microsoft.Extensions.DependencyInjection` and `HealthChecks` extensions for [Minio](minio) client ⚡️
 
 ## 🔧 Installation 🔧
 
@@ -22,10 +22,10 @@ services.AddMinio(options =>
 {
   options.Endpoint = "endpoint";
   // ...
-  options.OnClientConfiguration = client =>
+  options.ConfigureClient(client =>
   {
     client.WithSSL();
-  }
+  });
 });
 
 // Url based configuration
@@ -45,10 +45,10 @@ services.AddMinio(options =>
 {
   options.Endpoint = "endpoint1";
   // ...
-  options.OnClientConfiguration = client =>
+  options.ConfigureClient(client =>
   {
     client.WithSSL();
-  }
+  });
 });
 
 // Named extension overload
@@ -56,10 +56,10 @@ services.AddMinio("minio2", options =>
 {
   options.Endpoint = "endpoint2";
   // ...
-  options.OnClientConfiguration = client =>
+  options.ConfigureClient(client =>
   {
     client.WithSSL().WithTimeout(...);
-  }
+  });
 });
 
 // Explicit named Configure
@@ -92,3 +92,11 @@ services.AddHealthChecks()
   .AddMinio(sp => sp.GetRequiredService<MinioClient>())
   .AddMinio(sp => /* Get named client from cache or create new */);
 ```
+
+## Breaking changes
+- From 3.x to 4.x
+  - `Minio` upgraded to [4.0.0](minio-4.0.0)
+  - `options.OnClientConfiguration` replaced with `options.ConfigureClient(...)`
+
+[minio]: https://github.com/minio/minio-dotnet
+[minio-4.0.0]: https://github.com/minio/minio-dotnet/releases/tag/4.0.0

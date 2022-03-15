@@ -1,6 +1,5 @@
 using System.Net;
 using System.Reflection;
-using RestSharp;
 using Xunit;
 
 namespace Minio.AspNetCore.Tests
@@ -12,9 +11,9 @@ namespace Minio.AspNetCore.Tests
       var clientType = client.GetType();
 
       var endpoint = clientType
-        .GetProperty(nameof(MinioOptions.Endpoint), BindingFlags.Instance | BindingFlags.NonPublic)
+        .GetProperty("BaseUrl", BindingFlags.Instance | BindingFlags.NonPublic)
         ?.GetValue(client);
-      Assert.Equal($"http://{options.Endpoint}", endpoint);
+      Assert.Equal(options.Endpoint, endpoint);
 
       var region = clientType
         .GetField(nameof(MinioOptions.Region), BindingFlags.Instance | BindingFlags.NonPublic)
@@ -52,22 +51,22 @@ namespace Minio.AspNetCore.Tests
     {
       var clientType = client.GetType();
 
-      var restClient = clientType
-        .GetField("restClient", BindingFlags.Instance | BindingFlags.NonPublic)
-        ?.GetValue(client) as IRestClient;
+      var clientTimeout = (int)clientType
+        .GetField("requestTimeout", BindingFlags.Instance | BindingFlags.NonPublic)
+        ?.GetValue(client)!;
 
-      Assert.Equal(timeout, restClient?.Timeout);
+      Assert.Equal(timeout, clientTimeout);
     }
 
     public static void AssertWebProxy(MinioClient client, IWebProxy webProxy)
     {
       var clientType = client.GetType();
 
-      var restClient = clientType
-        .GetField("restClient", BindingFlags.Instance | BindingFlags.NonPublic)
-        ?.GetValue(client) as IRestClient;
+      var clientProxy = clientType
+        .GetProperty("Proxy", BindingFlags.Instance | BindingFlags.NonPublic)
+        ?.GetValue(client) as IWebProxy;
 
-      Assert.Equal(webProxy, restClient?.Proxy);
+      Assert.Equal(webProxy, clientProxy);
     }
   }
 }
