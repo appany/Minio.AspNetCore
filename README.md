@@ -6,7 +6,7 @@
 ![Tests](https://github.com/appany/Minio.AspNetCore/workflows/Tests/badge.svg)
 [![codecov](https://codecov.io/gh/appany/Minio.AspNetCore/branch/main/graph/badge.svg?token=CGFNCIRBKP)](https://codecov.io/gh/appany/Minio.AspNetCore)
 
-⚡️ `Microsoft.Extensions.DependencyInjection` and `HealthChecks` extensions for [Minio](minio) client ⚡️
+⚡️ `Microsoft.Extensions.DependencyInjection` and `HealthChecks` extensions for [Minio][minio] client ⚡️
 
 ## 🔧 Installation 🔧
 
@@ -95,7 +95,7 @@ services.AddHealthChecks()
 
 ## Breaking changes
 - From 3.x to 4.x
-  - `Minio` upgraded to [4.0.0](minio-4.0.0)
+  - `Minio` upgraded to [4.0.0][minio-4.0.0]
   - `options.OnClientConfiguration` replaced with `options.ConfigureClient(...)`
 
 [minio]: https://github.com/minio/minio-dotnet
