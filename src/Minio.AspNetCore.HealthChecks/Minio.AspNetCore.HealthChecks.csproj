@@ -27,7 +27,7 @@
   </ItemGroup>
 
   <ItemGroup Label="Packages">
-    <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="6.0.3" />
+    <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="6.0.5" />
   </ItemGroup>
 
   <ItemGroup Label="Assets">
