@@ -39,4 +39,4 @@ jobs:
           VERSION: ${{ steps.release.outputs.tag }}
 
       - name: Package | Push
-        run: dotnet nuget push pack/*.nupkg
+        run: dotnet nuget push pack/*.nupkg -s https://api.nuget.org/v3/index.json
