@@ -37,4 +37,4 @@ jobs:
           VERSION: ${{ steps.release.outputs.tag }}
 
       - name: Package | Push
-        run: dotnet nuget push pack/*.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
+        run: dotnet nuget push pack/*.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json --skip-duplicate
