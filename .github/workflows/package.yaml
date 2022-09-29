@@ -23,21 +23,20 @@ jobs:
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: 6.0.x
+        env:
+          NUGET_AUTH_TOKEN: ${{ secrets.NUGET_API_KEY }}
 
       - name: Package | Publish
-        uses: brandedoutcast/publish-nuget@master
-        with:
-          PROJECT_FILE_PATH: src/Minio.AspNetCore/Minio.AspNetCore.csproj
-          VERSION_STATIC: ${{ steps.release.outputs.tag }}
-          TAG_FORMAT: '*'
-          NUGET_KEY: ${{ secrets.NUGET_API_KEY }}
-          INCLUDE_SYMBOLS: true
+        run: dotnet pack -c Release -o ./pack /p:Version=$VERSION $PROJECT
+        env:
+          PROJECT: src/Minio.AspNetCore/Minio.AspNetCore.csproj
+          VERSION: ${{ steps.release.outputs.tag }}
 
       - name: Package | Publish | HealthChecks
-        uses: brandedoutcast/publish-nuget@master
-        with:
-          PROJECT_FILE_PATH: src/Minio.AspNetCore.HealthChecks/Minio.AspNetCore.HealthChecks.csproj
-          VERSION_STATIC: ${{ steps.release.outputs.tag }}
-          TAG_FORMAT: '*'
-          NUGET_KEY: ${{ secrets.NUGET_API_KEY }}
-          INCLUDE_SYMBOLS: true
+        run: dotnet pack -c Release -o ./pack /p:Version=$VERSION $PROJECT
+        env:
+          PROJECT: src/Minio.AspNetCore.HealthChecks/Minio.AspNetCore.HealthChecks.csproj
+          VERSION: ${{ steps.release.outputs.tag }}
+
+      - name: Package | Push
+        run: dotnet nuget push pack/*.nupkg
