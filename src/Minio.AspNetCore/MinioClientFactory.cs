@@ -32,7 +32,7 @@ namespace Minio.AspNetCore
 
       options.Configure?.Invoke(client);
 
-      return client;
+      return client.Build();
     }
   }
 }
