@@ -32,7 +32,7 @@ namespace Minio.AspNetCore.Tests
     [Fact]
     public void GetFromServices()
     {
-      var serviceProvider = services.BuildServiceProvider();
+      using var serviceProvider = services.BuildServiceProvider();
 
       var factory = serviceProvider.GetService<IMinioClientFactory>();
       Assert.NotNull(factory);
@@ -55,7 +55,7 @@ namespace Minio.AspNetCore.Tests
     [Fact]
     public void SameClients()
     {
-      var serviceProvider = services.BuildServiceProvider();
+      using var serviceProvider = services.BuildServiceProvider();
 
       var client1 = serviceProvider.GetRequiredService<MinioClient>();
       var client2 = serviceProvider.GetRequiredService<MinioClient>();
@@ -66,10 +66,10 @@ namespace Minio.AspNetCore.Tests
     [Fact]
     public void MultipleClients()
     {
-      var serviceProvider = services.BuildServiceProvider();
+      using var serviceProvider = services.BuildServiceProvider();
 
       var client1 = serviceProvider.GetRequiredService<MinioClient>();
-      var client2 = serviceProvider.GetRequiredService<IMinioClientFactory>().CreateClient();
+      using var client2 = serviceProvider.GetRequiredService<IMinioClientFactory>().CreateClient();
 
       Assert.NotSame(client1, client2);
     }

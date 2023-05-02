@@ -24,7 +24,7 @@ namespace Minio.AspNetCore.Tests
     [Fact]
     public void GetFromServices()
     {
-      var serviceProvider = services.BuildServiceProvider();
+      using var serviceProvider = services.BuildServiceProvider();
 
       var factory = serviceProvider.GetService<IMinioClientFactory>();
       Assert.NotNull(factory);

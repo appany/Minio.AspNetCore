@@ -12,7 +12,7 @@ namespace Minio.AspNetCore.Tests
       var services = new ServiceCollection()
         .AddMinio(new Uri("s3://accessKey:secretKey@localhost:9000/region"));
 
-      var serviceProvider = services.BuildServiceProvider();
+      using var serviceProvider = services.BuildServiceProvider();
 
       var options = serviceProvider.GetRequiredService<IOptions<MinioOptions>>().Value;
 
@@ -23,7 +23,7 @@ namespace Minio.AspNetCore.Tests
     }
 
     [Fact]
-    public void UrlBasedConfiguration_Endpoint_Overriden()
+    public void UrlBasedConfigurationEndpointOverriden()
     {
       var services = new ServiceCollection()
         .AddMinio(new Uri("s3://accessKey:secretKey@localhost:9000/region"), o =>
@@ -31,7 +31,7 @@ namespace Minio.AspNetCore.Tests
           o.Endpoint = "endpoint";
         });
 
-      var serviceProvider = services.BuildServiceProvider();
+      using var serviceProvider = services.BuildServiceProvider();
 
       var options = serviceProvider.GetRequiredService<IOptions<MinioOptions>>().Value;
 
@@ -47,12 +47,12 @@ namespace Minio.AspNetCore.Tests
     [InlineData("s3://localhost:9000/region")]
     [InlineData("s3://localhost:9000")]
     [InlineData("localhost:9000")]
-    public void UrlBasedConfiguration_InvalidCredentials_Throw(string url)
+    public void UrlBasedConfigurationInvalidCredentialsThrow(string url)
     {
       var services = new ServiceCollection()
         .AddMinio(new Uri(url));
 
-      var serviceProvider = services.BuildServiceProvider();
+      using var serviceProvider = services.BuildServiceProvider();
 
       Assert.Throws<InvalidOperationException>(
         () => serviceProvider.GetRequiredService<IOptions<MinioOptions>>().Value);
