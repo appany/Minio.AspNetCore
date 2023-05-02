@@ -8,6 +8,16 @@ namespace Minio.AspNetCore.Tests
   {
     public static void AssertOptionsMatch(MinioClient client, MinioOptions options)
     {
+      if (client is null)
+      {
+        throw new ArgumentNullException(nameof(client));
+      }
+
+      if (options is null)
+      {
+        throw new ArgumentNullException(nameof(options));
+      }
+
       var clientType = client.GetType();
 
       var endpoint = clientType
@@ -38,6 +48,11 @@ namespace Minio.AspNetCore.Tests
 
     public static void AssertSecure(MinioClient client)
     {
+      if (client is null)
+      {
+        throw new ArgumentNullException(nameof(client));
+      }
+
       var clientType = client.GetType();
 
       var secure = (bool)clientType
@@ -49,6 +64,11 @@ namespace Minio.AspNetCore.Tests
 
     public static void AssertTimeout(MinioClient client, int timeout)
     {
+      if (client is null)
+      {
+        throw new ArgumentNullException(nameof(client));
+      }
+
       var clientType = client.GetType();
 
       var clientTimeout = (int)clientType
@@ -60,6 +80,11 @@ namespace Minio.AspNetCore.Tests
 
     public static void AssertWebProxy(MinioClient client, IWebProxy webProxy)
     {
+      if (client is null)
+      {
+        throw new ArgumentNullException(nameof(client));
+      }
+
       var clientType = client.GetType();
 
       var clientProxy = clientType

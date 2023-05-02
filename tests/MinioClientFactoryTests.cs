@@ -1,5 +1,5 @@
-using System.Net;
 using Microsoft.Extensions.Options;
+using System.Net;
 using Xunit;
 
 namespace Minio.AspNetCore.Tests
