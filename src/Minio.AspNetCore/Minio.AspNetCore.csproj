@@ -2,43 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <LangVersion>9</LangVersion>
-    <EmbedUntrackedSources>true</EmbedUntrackedSources>
-    <IncludeSymbols>true</IncludeSymbols>
-    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-    <PublishRepositoryUrl>true</PublishRepositoryUrl>
-  </PropertyGroup>
-
-  <PropertyGroup>
-    <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>https://github.com/appany/Minio.AspNetCore</RepositoryUrl>
-    <PackageProjectUrl>https://github.com/appany/Minio.AspNetCore</PackageProjectUrl>
-    <PackageIcon>logo.png</PackageIcon>
-    <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <Copyright>Copyright ©2021 AppAny</Copyright>
-    <Authors>sergeyshaykhullin</Authors>
-    <Description>ASP.NET Core extensions for Minio client</Description>
-    <PackageTags>.NET Core;ASP.NET Core;Minio</PackageTags>
   </PropertyGroup>
 
   <ItemGroup Label="Packages">
     <PackageReference Include="Minio" Version="4.0.7" />
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
-  </ItemGroup>
-
-  <ItemGroup Label="Assets">
-    <None Include="../../assets/logo.png">
-      <Pack>true</Pack>
-      <Visible>false</Visible>
-      <PackagePath />
-    </None>
-    <None Include="../../LICENSE">
-      <Pack>true</Pack>
-      <Visible>false</Visible>
-      <PackagePath />
-    </None>
   </ItemGroup>
 
 </Project>

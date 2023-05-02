@@ -2,24 +2,6 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <LangVersion>9</LangVersion>
-    <EmbedUntrackedSources>true</EmbedUntrackedSources>
-    <IncludeSymbols>true</IncludeSymbols>
-    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-    <PublishRepositoryUrl>true</PublishRepositoryUrl>
-  </PropertyGroup>
-
-  <PropertyGroup>
-    <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>https://github.com/appany/Minio.AspNetCore</RepositoryUrl>
-    <PackageProjectUrl>https://github.com/appany/Minio.AspNetCore</PackageProjectUrl>
-    <PackageIcon>logo.png</PackageIcon>
-    <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <Copyright>Copyright ©2021 AppAny</Copyright>
-    <Authors>sergeyshaykhullin</Authors>
-    <Description>HealthChecks extensions for Minio client</Description>
-    <PackageTags>.NET Core;ASP.NET Core;Minio;HealthChecks</PackageTags>
   </PropertyGroup>
 
   <ItemGroup Label="Projects">
@@ -28,19 +10,6 @@
 
   <ItemGroup Label="Packages">
     <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="7.0.2" />
-  </ItemGroup>
-
-  <ItemGroup Label="Assets">
-    <None Include="../../assets/logo.png">
-      <Pack>true</Pack>
-      <Visible>false</Visible>
-      <PackagePath />
-    </None>
-    <None Include="../../LICENSE">
-      <Pack>true</Pack>
-      <Visible>false</Visible>
-      <PackagePath />
-    </None>
   </ItemGroup>
 
 </Project>
