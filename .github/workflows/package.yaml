@@ -8,21 +8,21 @@ on:
 jobs:
   package:
     name: Package
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     timeout-minutes: 5
 
     steps:
       - name: Package | Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Package | Release
         id: release
         uses: tenhaus/get-release-or-tag@v2
 
       - name: Package | Setup
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: 6.0.x
+          dotnet-version: 7.0.x
 
       - name: Package | Publish
         run: dotnet pack -c Release -o ./pack /p:Version=$VERSION $PROJECT

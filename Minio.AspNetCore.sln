@@ -16,6 +16,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{70B60279-544A-4B41-8D3C-BF28E8DF0E9C}"
 	ProjectSection(SolutionItems) = preProject
 		Directory.Build.props = Directory.Build.props
+		.github\workflows\package.yaml = .github\workflows\package.yaml
+		.github\workflows\release.yaml = .github\workflows\release.yaml
+		.github\workflows\tests.yaml = .github\workflows\tests.yaml
 	EndProjectSection
 EndProject
 Global
