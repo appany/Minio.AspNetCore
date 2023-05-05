@@ -1,5 +1,5 @@
-using System.Net;
 using Microsoft.Extensions.Options;
+using System.Net;
 using Xunit;
 
 namespace Minio.AspNetCore.Tests
@@ -16,9 +16,9 @@ namespace Minio.AspNetCore.Tests
     }
 
     [Fact]
-    public void PassedOptions_Corrent()
+    public void PassedOptionsCorrent()
     {
-      var monitor = MinioOptionsTestHelper.CreateOptionsMonitor(
+      using var monitor = MinioOptionsTestHelper.CreateOptionsMonitor(
         new[]
         {
           new ConfigureOptions<MinioOptions>(options =>
@@ -39,7 +39,7 @@ namespace Minio.AspNetCore.Tests
 
       var factory = new MinioClientFactory(monitor);
 
-      var client = factory.CreateClient();
+      using var client = factory.CreateClient();
 
       MinioAsserts.AssertOptionsMatch(client, monitor.Get(Options.DefaultName));
       MinioAsserts.AssertSecure(client);
@@ -48,9 +48,9 @@ namespace Minio.AspNetCore.Tests
     }
 
     [Fact]
-    public void PassedOptions_Named_Corrent()
+    public void PassedOptionsNamedCorrent()
     {
-      var monitor = MinioOptionsTestHelper.CreateOptionsMonitor(
+      using var monitor = MinioOptionsTestHelper.CreateOptionsMonitor(
         new IConfigureOptions<MinioOptions>[]
         {
           new ConfigureOptions<MinioOptions>(options =>
@@ -73,10 +73,10 @@ namespace Minio.AspNetCore.Tests
 
       var factory = new MinioClientFactory(monitor);
 
-      var client1 = factory.CreateClient(Options.DefaultName);
+      using var client1 = factory.CreateClient(Options.DefaultName);
       MinioAsserts.AssertOptionsMatch(client1, monitor.Get(Options.DefaultName));
 
-      var client2 = factory.CreateClient(MinioOptionsTestHelper.CustomOptionsName);
+      using var client2 = factory.CreateClient(MinioOptionsTestHelper.CustomOptionsName);
       MinioAsserts.AssertOptionsMatch(client2, monitor.Get(MinioOptionsTestHelper.CustomOptionsName));
     }
   }

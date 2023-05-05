@@ -16,12 +16,12 @@ on:
 jobs:
   release:
     name: Release
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     timeout-minutes: 5
 
     steps:
       - name: Release | Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Release | Tag
         id: tag

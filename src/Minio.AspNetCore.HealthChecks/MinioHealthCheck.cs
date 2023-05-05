@@ -1,6 +1,3 @@
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 namespace Minio.AspNetCore.HealthChecks
@@ -20,7 +17,7 @@ namespace Minio.AspNetCore.HealthChecks
     {
       try
       {
-        await minioClient.ListBucketsAsync(cancellationToken);
+        await minioClient.ListBucketsAsync(cancellationToken).ConfigureAwait(false);
 
         return HealthCheckResult.Healthy();
       }

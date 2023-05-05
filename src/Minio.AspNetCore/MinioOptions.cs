@@ -1,5 +1,3 @@
-using System;
-
 namespace Minio.AspNetCore
 {
   public class MinioOptions
