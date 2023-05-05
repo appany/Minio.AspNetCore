@@ -72,7 +72,7 @@ namespace Minio.AspNetCore.Tests
       var clientType = client.GetType();
 
       var clientTimeout = (int)clientType
-        .GetField("requestTimeout", BindingFlags.Instance | BindingFlags.NonPublic)
+        .GetField("RequestTimeout", BindingFlags.Instance | BindingFlags.NonPublic)
         ?.GetValue(client)!;
 
       Assert.Equal(timeout, clientTimeout);
