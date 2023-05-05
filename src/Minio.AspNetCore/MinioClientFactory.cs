@@ -20,7 +20,7 @@ namespace Minio.AspNetCore
     {
       var options = optionsMonitor.Get(name);
 
-      using var client = new MinioClient()
+      var client = new MinioClient()
         .WithEndpoint(options.Endpoint)
         .WithCredentials(options.AccessKey, options.SecretKey)
         .WithSessionToken(options.SessionToken);
