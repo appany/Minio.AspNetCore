@@ -24,10 +24,22 @@ jobs:
         with:
           dotnet-version: 7.0.x
 
+      - name: Package | Build
+        run: dotnet build -c Release /p:Version=$VERSION $PROJECT
+        env:
+          PROJECT: src/Minio.AspNetCore/Minio.AspNetCore.csproj
+          VERSION: ${{ steps.release.outputs.tag }}
+
       - name: Package | Publish
         run: dotnet pack -c Release /p:Version=$VERSION $PROJECT
         env:
           PROJECT: src/Minio.AspNetCore/Minio.AspNetCore.csproj
+          VERSION: ${{ steps.release.outputs.tag }}
+
+      - name: Package | Build | HealthChecks
+        run: dotnet build -c Release /p:Version=$VERSION $PROJECT
+        env:
+          PROJECT: src/Minio.AspNetCore.HealthChecks/Minio.AspNetCore.HealthChecks.csproj
           VERSION: ${{ steps.release.outputs.tag }}
 
       - name: Package | Publish | HealthChecks
