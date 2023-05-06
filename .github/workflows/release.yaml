@@ -25,7 +25,7 @@ jobs:
 
       - name: Release | Tag
         id: tag
-        uses: zwaldowski/semver-release-action@v2
+        uses: zwaldowski/semver-release-action@v3
         with:
           bump: ${{ github.event.inputs.release }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
