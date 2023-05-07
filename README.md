@@ -94,9 +94,13 @@ services.AddHealthChecks()
 ```
 
 ## Breaking changes
+- From 4.x to 5.x
+  - Target frameworks support netstandard, .net6 and .net7
+  - `Minio` upgraded to [5.0.0][minio-5.0.0]
 - From 3.x to 4.x
   - `Minio` upgraded to [4.0.0][minio-4.0.0]
   - `options.OnClientConfiguration` replaced with `options.ConfigureClient(...)`
 
 [minio]: https://github.com/minio/minio-dotnet
 [minio-4.0.0]: https://github.com/minio/minio-dotnet/releases/tag/4.0.0
+[minio-5.0.0]: https://github.com/minio/minio-dotnet/releases/tag/5.0.0
