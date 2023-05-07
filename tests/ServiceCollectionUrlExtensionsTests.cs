@@ -26,10 +26,7 @@ namespace Minio.AspNetCore.Tests
     public void UrlBasedConfigurationEndpointOverriden()
     {
       var services = new ServiceCollection()
-        .AddMinio(new Uri("s3://accessKey:secretKey@localhost:9000/region"), o =>
-        {
-          o.Endpoint = "endpoint";
-        });
+        .AddMinio(new Uri("s3://accessKey:secretKey@localhost:9000/region"), o => o.Endpoint = "endpoint");
 
       using var serviceProvider = services.BuildServiceProvider();
 
