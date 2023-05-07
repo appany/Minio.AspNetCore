@@ -31,7 +31,7 @@ jobs:
           VERSION: ${{ steps.release.outputs.tag }}
 
       - name: Package | Publish
-        run: dotnet pack -c Release /p:Version=$VERSION $PROJECT
+        run: dotnet pack -c Release -o ./artifacts /p:Version=$VERSION $PROJECT
         env:
           PROJECT: src/Minio.AspNetCore/Minio.AspNetCore.csproj
           VERSION: ${{ steps.release.outputs.tag }}
@@ -43,7 +43,7 @@ jobs:
           VERSION: ${{ steps.release.outputs.tag }}
 
       - name: Package | Publish | HealthChecks
-        run: dotnet pack -c Release /p:Version=$VERSION $PROJECT
+        run: dotnet pack -c Release -o ./artifacts /p:Version=$VERSION $PROJECT
         env:
           PROJECT: src/Minio.AspNetCore.HealthChecks/Minio.AspNetCore.HealthChecks.csproj
           VERSION: ${{ steps.release.outputs.tag }}
