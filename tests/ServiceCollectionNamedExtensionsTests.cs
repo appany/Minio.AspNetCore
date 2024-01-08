@@ -29,7 +29,7 @@ namespace Minio.AspNetCore.Tests
       var factory = serviceProvider.GetService<IMinioClientFactory>();
       Assert.NotNull(factory);
 
-      var client = serviceProvider.GetService<MinioClient>();
+      var client = serviceProvider.GetService<IMinioClient>();
       Assert.NotNull(client);
 
       var monitor = serviceProvider.GetRequiredService<IOptionsMonitor<MinioOptions>>();

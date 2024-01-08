@@ -6,92 +6,37 @@ namespace Minio.AspNetCore.Tests
 {
   public static class MinioAsserts
   {
-    public static void AssertOptionsMatch(MinioClient client, MinioOptions options)
+    public static void AssertOptionsMatch(IMinioClient client, MinioOptions options)
     {
-      if (client is null)
-      {
-        throw new ArgumentNullException(nameof(client));
-      }
+      ArgumentNullException.ThrowIfNull(client);
+      ArgumentNullException.ThrowIfNull(options);
 
-      if (options is null)
-      {
-        throw new ArgumentNullException(nameof(options));
-      }
-
-      var clientType = client.GetType();
-
-      var endpoint = clientType
-        .GetProperty("BaseUrl", BindingFlags.Instance | BindingFlags.NonPublic)
-        ?.GetValue(client);
-      Assert.Equal(options.Endpoint, endpoint);
-
-      var region = clientType
-        .GetField(nameof(MinioOptions.Region), BindingFlags.Instance | BindingFlags.NonPublic)
-        ?.GetValue(client);
-      Assert.Equal(options.Region, region);
-
-      var accessKey = clientType
-        .GetProperty(nameof(MinioOptions.AccessKey), BindingFlags.Instance | BindingFlags.NonPublic)
-        ?.GetValue(client);
-      Assert.Equal(options.AccessKey, accessKey);
-
-      var secretKey = clientType
-        .GetProperty(nameof(MinioOptions.SecretKey), BindingFlags.Instance | BindingFlags.NonPublic)
-        ?.GetValue(client);
-      Assert.Equal(options.SecretKey, secretKey);
-
-      var sessionToken = clientType
-        .GetProperty(nameof(MinioOptions.SessionToken), BindingFlags.Instance | BindingFlags.NonPublic)
-        ?.GetValue(client);
-      Assert.Equal(options.SessionToken, sessionToken);
+      Assert.Equal($"{(client.Config.Secure ? "https" : "http")}://{options.Endpoint}", client.Config.Endpoint);
+      Assert.Equal(options.Region, client.Config.Region);
+      Assert.Equal(options.AccessKey, client.Config.AccessKey);
+      Assert.Equal(options.SecretKey, client.Config.SecretKey);
+      Assert.Equal(options.SessionToken, client.Config.SessionToken);
     }
 
-    public static void AssertSecure(MinioClient client)
+    public static void AssertSecure(IMinioClient client)
     {
-      if (client is null)
-      {
-        throw new ArgumentNullException(nameof(client));
-      }
+      ArgumentNullException.ThrowIfNull(client);
 
-      var clientType = client.GetType();
-
-      var secure = (bool)clientType
-        .GetProperty("Secure", BindingFlags.Instance | BindingFlags.NonPublic)
-        ?.GetValue(client)!;
-
-      Assert.True(secure);
+      Assert.True(client.Config.Secure);
     }
 
-    public static void AssertTimeout(MinioClient client, int timeout)
+    public static void AssertTimeout(IMinioClient client, int timeout)
     {
-      if (client is null)
-      {
-        throw new ArgumentNullException(nameof(client));
-      }
+      ArgumentNullException.ThrowIfNull(client);
 
-      var clientType = client.GetType();
-
-      var clientTimeout = (int)clientType
-        .GetField("RequestTimeout", BindingFlags.Instance | BindingFlags.NonPublic)
-        ?.GetValue(client)!;
-
-      Assert.Equal(timeout, clientTimeout);
+      Assert.Equal(timeout, client.Config.RequestTimeout);
     }
 
-    public static void AssertWebProxy(MinioClient client, IWebProxy webProxy)
+    public static void AssertWebProxy(IMinioClient client, IWebProxy webProxy)
     {
-      if (client is null)
-      {
-        throw new ArgumentNullException(nameof(client));
-      }
+      ArgumentNullException.ThrowIfNull(client);
 
-      var clientType = client.GetType();
-
-      var clientProxy = clientType
-        .GetProperty("Proxy", BindingFlags.Instance | BindingFlags.NonPublic)
-        ?.GetValue(client) as IWebProxy;
-
-      Assert.Equal(webProxy, clientProxy);
+      Assert.Equal(webProxy, client.Config.Proxy);
     }
   }
 }

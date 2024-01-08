@@ -8,9 +8,9 @@ namespace Minio.AspNetCore
     public string Region { get; set; } = string.Empty;
     public string SessionToken { get; set; } = string.Empty;
 
-    internal Action<MinioClient>? Configure { get; private set; }
+    internal Action<IMinioClient>? Configure { get; private set; }
 
-    public void ConfigureClient(Action<MinioClient> configure)
+    public void ConfigureClient(Action<IMinioClient> configure)
     {
       Configure = configure;
     }

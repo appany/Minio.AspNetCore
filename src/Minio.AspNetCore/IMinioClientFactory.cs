@@ -2,7 +2,7 @@ namespace Minio.AspNetCore
 {
   public interface IMinioClientFactory
   {
-    MinioClient CreateClient();
-    MinioClient CreateClient(string name);
+    IMinioClient CreateClient();
+    IMinioClient CreateClient(string name);
   }
 }
