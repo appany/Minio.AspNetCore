@@ -26,7 +26,7 @@ namespace Minio.AspNetCore.Tests
     {
       Assert.Contains(services, x => x.ServiceType == typeof(IMinioClientFactory));
       Assert.Contains(services, x => x.ServiceType == typeof(IConfigureOptions<MinioOptions>));
-      Assert.Contains(services, x => x.ServiceType == typeof(MinioClient));
+      Assert.Contains(services, x => x.ServiceType == typeof(IMinioClient));
     }
 
     [Fact]
@@ -37,7 +37,7 @@ namespace Minio.AspNetCore.Tests
       var factory = serviceProvider.GetService<IMinioClientFactory>();
       Assert.NotNull(factory);
 
-      var client = serviceProvider.GetService<MinioClient>();
+      var client = serviceProvider.GetService<IMinioClient>();
       Assert.NotNull(client);
 
       var options = serviceProvider.GetService<IOptions<MinioOptions>>()?.Value;
@@ -57,8 +57,8 @@ namespace Minio.AspNetCore.Tests
     {
       using var serviceProvider = services.BuildServiceProvider();
 
-      var client1 = serviceProvider.GetRequiredService<MinioClient>();
-      var client2 = serviceProvider.GetRequiredService<MinioClient>();
+      var client1 = serviceProvider.GetRequiredService<IMinioClient>();
+      var client2 = serviceProvider.GetRequiredService<IMinioClient>();
 
       Assert.Same(client1, client2);
     }
@@ -68,7 +68,7 @@ namespace Minio.AspNetCore.Tests
     {
       using var serviceProvider = services.BuildServiceProvider();
 
-      var client1 = serviceProvider.GetRequiredService<MinioClient>();
+      var client1 = serviceProvider.GetRequiredService<IMinioClient>();
       using var client2 = serviceProvider.GetRequiredService<IMinioClientFactory>().CreateClient();
 
       Assert.NotSame(client1, client2);

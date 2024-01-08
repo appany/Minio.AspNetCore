@@ -11,19 +11,23 @@ namespace Minio.AspNetCore
       this.optionsMonitor = optionsMonitor;
     }
 
-    public MinioClient CreateClient()
+    public IMinioClient CreateClient()
     {
       return CreateClient(Options.DefaultName);
     }
 
-    public MinioClient CreateClient(string name)
+    public IMinioClient CreateClient(string name)
     {
       var options = optionsMonitor.Get(name);
 
+#pragma warning disable IDISP001
+#pragma warning disable CA2000
       var client = new MinioClient()
+#pragma warning restore CA2000
         .WithEndpoint(options.Endpoint)
         .WithCredentials(options.AccessKey, options.SecretKey)
         .WithSessionToken(options.SessionToken);
+#pragma warning restore IDISP001
 
       if (!string.IsNullOrEmpty(options.Region))
       {
