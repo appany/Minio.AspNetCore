@@ -100,7 +100,11 @@ services.AddHealthChecks()
 - From 3.x to 4.x
   - `Minio` upgraded to [4.0.0][minio-4.0.0]
   - `options.OnClientConfiguration` replaced with `options.ConfigureClient(...)`
+- From 5.x to 6.x
+  - `Minio` upgraded to [6.0.1][minio-6.0.1]
+  - DI client type changed from `MinioClient` to `IMinioClient`
 
 [minio]: https://github.com/minio/minio-dotnet
 [minio-4.0.0]: https://github.com/minio/minio-dotnet/releases/tag/4.0.0
 [minio-5.0.0]: https://github.com/minio/minio-dotnet/releases/tag/5.0.0
+[minio-6.0.1]: https://github.com/minio/minio-dotnet/releases/tag/6.0.1
