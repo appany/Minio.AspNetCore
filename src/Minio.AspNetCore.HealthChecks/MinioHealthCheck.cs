@@ -4,11 +4,11 @@ namespace Minio.AspNetCore.HealthChecks
 {
   public class MinioHealthCheck : IHealthCheck
   {
-    private readonly MinioClient minioClient;
+    private readonly IMinioClient _minioClient;
 
-    public MinioHealthCheck(MinioClient minioClient)
+    public MinioHealthCheck(IMinioClient minioClient)
     {
-      this.minioClient = minioClient;
+      _minioClient = minioClient;
     }
 
     public async Task<HealthCheckResult> CheckHealthAsync(
@@ -17,7 +17,7 @@ namespace Minio.AspNetCore.HealthChecks
     {
       try
       {
-        await minioClient.ListBucketsAsync(cancellationToken).ConfigureAwait(false);
+        await _minioClient.ListBucketsAsync(cancellationToken).ConfigureAwait(false);
 
         return HealthCheckResult.Healthy();
       }
