@@ -12,7 +12,7 @@ namespace Minio.AspNetCore.HealthChecks
     /// </summary>
     public static IHealthChecksBuilder AddMinio(
       this IHealthChecksBuilder builder,
-      Func<IServiceProvider, MinioClient> factory,
+      Func<IServiceProvider, IMinioClient> factory,
       string name = "minio",
       string bucket = "health",
       HealthStatus? failureStatus = null,

@@ -5,10 +5,10 @@ namespace Minio.AspNetCore.HealthChecks
 {
   public class MinioHealthCheck : IHealthCheck
   {
-    private readonly MinioClient minioClient;
+    private readonly IMinioClient minioClient;
     private readonly string bucket;
 
-    public MinioHealthCheck(MinioClient minioClient, string bucket)
+    public MinioHealthCheck(IMinioClient minioClient, string bucket)
     {
       this.minioClient = minioClient;
       this.bucket = bucket;
