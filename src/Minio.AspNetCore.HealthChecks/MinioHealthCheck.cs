@@ -1,14 +1,17 @@
 using Microsoft.Extensions.Diagnostics.HealthChecks;
+using Minio.DataModel.Args;
 
 namespace Minio.AspNetCore.HealthChecks
 {
   public class MinioHealthCheck : IHealthCheck
   {
-    private readonly IMinioClient _minioClient;
+    private readonly IMinioClient minioClient;
+    private readonly string bucket;
 
-    public MinioHealthCheck(IMinioClient minioClient)
+    public MinioHealthCheck(IMinioClient minioClient, string bucket)
     {
-      _minioClient = minioClient;
+      this.minioClient = minioClient;
+      this.bucket = bucket;
     }
 
     public async Task<HealthCheckResult> CheckHealthAsync(
@@ -17,7 +20,8 @@ namespace Minio.AspNetCore.HealthChecks
     {
       try
       {
-        await _minioClient.ListBucketsAsync(cancellationToken).ConfigureAwait(false);
+        var bucketExistsArgs = new BucketExistsArgs().WithBucket(bucket);
+        await minioClient.BucketExistsAsync(bucketExistsArgs, cancellationToken).ConfigureAwait(false);
 
         return HealthCheckResult.Healthy();
       }
